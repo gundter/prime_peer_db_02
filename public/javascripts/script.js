@@ -21,11 +21,45 @@ $(document).ready(function(){
 
     getData();
     assignClicks();
+
+    $('.ascend').on('click', function(){
+        $.ajax({
+            url: '/assignments?order=1',
+            data:{},
+            method: 'get',
+            dataType: 'json',
+            success: function(data){
+                console.log("works");
+                clearData();
+                processData(data);
+            },
+            complete: function(){
+              console.log("done");
+            }
+        });
+    });
+
+    $('.descend').on('click', function(){
+        $.ajax({
+            url: '/assignments?order=-1',
+            data:{},
+            method: 'get',
+            dataType: 'json',
+            success: function(data){
+                console.log("works");
+                clearData();
+                processData(data);
+            },
+            complete: function(){
+                console.log("done");
+            }
+        });
+    });
 });
 
 function getData(){
     $.ajax({
-        url: '/assignments',
+        url: '/assignments?order=1',
         data: {},
         method: 'get',
         dataType: 'json',
@@ -84,6 +118,7 @@ function updateData(data){
         }
     });
 }
+
 
 
 function clearData(){
@@ -208,3 +243,4 @@ function clearEditor(){
     $dateEditor.val('');
     $editPanel.slideUp().delay().removeClass('change');
 }
+
