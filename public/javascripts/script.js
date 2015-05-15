@@ -22,63 +22,168 @@ $(document).ready(function(){
     getData();
     assignClicks();
 
-    $('.searchBtn').on('click', function(){
-       var searchTerm = $('#searchName').val();
-        $.ajax({
-            url: '/assignments?order=1&q=' + searchTerm,
-            data: {},
-            method: 'get',
-            dataType: 'json',
-            success: function(data){
-                clearData();
-                processData(data);
-            },
-            complete: function(){
-                console.log('Search call complete');
-            }
-        });
+    $('.searchName').on('click', function(){
+        var searchTerm = $('#searchName').val();
+        var dateOne = $('#startDate').val();
+        var dateTwo = $('#endDate').val();
+        if (dateOne=='' && dateTwo=='') {
+            dateOne = '0001-01-01';
+            dateTwo = '9999-12-31';
+            $.ajax({
+                url:'/assignments/search?order=1&q=' + searchTerm + '&startDate=' + dateOne + '&endDate=' + dateTwo,
+                data:{},
+                method: 'get',
+                dataType: 'json',
+                success: function(data){
+                    clearData();
+                    processData(data);
+                },
+                complete: function(){
+                    console.log('No date ajax call complete');
+                }
+            });
+
+        }else{
+            $.ajax({
+                url: '/assignments/search?order=1&q=' + searchTerm + '&startDate=' + dateOne + '&endDate=' + dateTwo,
+                data:{},
+                method: 'get',
+                dataType: 'json',
+                success: function(data){
+                    console.log("works");
+                    clearData();
+                    processData(data);
+                },
+                complete: function(){
+                    console.log("done");
+                }
+            });
+        }
+    });
+
+    $('.searchDate').on('click', function(){
+        var searchTerm = $('#searchName').val();
+        var dateOne = $('#startDate').val();
+        var dateTwo = $('#endDate').val();
+        if (dateOne=='' && dateTwo=='') {
+            dateOne = '0001-01-01';
+            dateTwo = '9999-12-31';
+            $.ajax({
+                url:'/assignments/search?order=1&q=' + searchTerm + '&startDate=' + dateOne + '&endDate=' + dateTwo,
+                data:{},
+                method: 'get',
+                dataType: 'json',
+                success: function(data){
+                    clearData();
+                    processData(data);
+                },
+                complete: function(){
+                    console.log('No date ajax call complete');
+                }
+            });
+
+        }else{
+            $.ajax({
+                url: '/assignments/search?order=1&q=' + searchTerm + '&startDate=' + dateOne + '&endDate=' + dateTwo,
+                data:{},
+                method: 'get',
+                dataType: 'json',
+                success: function(data){
+                    console.log("works");
+                    clearData();
+                    processData(data);
+                },
+                complete: function(){
+                    console.log("done");
+                }
+            });
+        }
     });
 
     $('.ascend').on('click', function(){
         var searchTerm = $('#searchName').val();
-        $.ajax({
-            url: '/assignments?order=1&q=' + searchTerm,
-            data:{},
-            method: 'get',
-            dataType: 'json',
-            success: function(data){
-                console.log("works");
-                clearData();
-                processData(data);
-            },
-            complete: function(){
-              console.log("done");
-            }
-        });
+        var dateOne = $('#startDate').val();
+        var dateTwo = $('#endDate').val();
+        console.log(dateOne);
+        console.log(dateTwo);
+        if (dateOne=='' && dateTwo=='') {
+            dateOne = '0001-01-01';
+            dateTwo = '9999-12-31';
+            $.ajax({
+                url:'/assignments/search?order=1&q=' + searchTerm + '&startDate=' + dateOne + '&endDate=' + dateTwo,
+                data:{},
+                method: 'get',
+                dataType: 'json',
+                success: function(data){
+                    clearData();
+                    processData(data);
+                },
+                complete: function(){
+                    console.log('No date ajax call complete');
+                }
+            });
+
+        }else{
+            $.ajax({
+                url: '/assignments/search?order=1&q=' + searchTerm + '&startDate=' + dateOne + '&endDate=' + dateTwo,
+                data:{},
+                method: 'get',
+                dataType: 'json',
+                success: function(data){
+                    console.log("works");
+                    clearData();
+                    processData(data);
+                },
+                complete: function(){
+                    console.log("done");
+                }
+            });
+        }
     });
 
     $('.descend').on('click', function(){
         var searchTerm = $('#searchName').val();
-        $.ajax({
-            url: '/assignments?order=-1&q=' + searchTerm,
-            data:{},
-            method: 'get',
-            dataType: 'json',
-            success: function(data){
-                console.log("works");
-                clearData();
-                processData(data);
-            },
-            complete: function(){
-                console.log("done");
-            }
-        });
+        var dateOne = $('#startDate').val();
+        var dateTwo = $('#endDate').val();
+        if (dateOne=='' && dateTwo=='') {
+            dateOne = '0001-01-01';
+            dateTwo = '9999-12-31';
+            $.ajax({
+                url:'/assignments/search?order=-1&q=' + searchTerm + '&startDate=' + dateOne + '&endDate=' + dateTwo,
+                data:{},
+                method: 'get',
+                dataType: 'json',
+                success: function(data){
+                    clearData();
+                    processData(data);
+                },
+                complete: function(){
+                    console.log('No date ajax call complete');
+                }
+            });
+
+        }else{
+            $.ajax({
+                url: '/assignments/search?order=-1&q=' + searchTerm + '&startDate=' + dateOne + '&endDate=' + dateTwo,
+                data:{},
+                method: 'get',
+                dataType: 'json',
+                success: function(data){
+                    console.log("works");
+                    clearData();
+                    processData(data);
+                },
+                complete: function(){
+                    console.log("done");
+                }
+            });
+        }
     });
 });
 
 function getData(){
     $.ajax({
-        url: '/assignments?order=1',
+        url: '/assignments',
         data: {},
         method: 'get',
         dataType: 'json',
