@@ -22,6 +22,11 @@ $(document).ready(function(){
     getData();
     assignClicks();
 
+    $('.reset').on('click', function(){
+       resetSearch();
+        getData();
+    });
+
     $('.searchName').on('click', function(){
         var searchTerm = $('#searchName').val();
         var dateOne = $('#startDate').val();
@@ -180,6 +185,12 @@ $(document).ready(function(){
         }
     });
 });
+
+function resetSearch (){
+    $('#searchName').val('');
+    $('#startDate').val('');
+    $('#endDate').val('');
+}
 
 function getData(){
     $.ajax({
