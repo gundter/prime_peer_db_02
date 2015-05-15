@@ -6,7 +6,8 @@ var assignments = require('../models/assignment');
 router.get('/', function(req, res, next) {
 
   var order = req.query.order;
-  assignments.find({}, null, {sort: {name: order}}, function (err, assignments) {
+  var search = req.query.q;
+  assignments.find({name: new RegExp(search, 'i')}, null, {sort: {name: order}}, function (err, assignments) {
     if (err) return next(err);
     res.json(assignments);
   });

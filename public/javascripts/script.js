@@ -22,9 +22,27 @@ $(document).ready(function(){
     getData();
     assignClicks();
 
-    $('.ascend').on('click', function(){
+    $('.searchBtn').on('click', function(){
+       var searchTerm = $('#searchName').val();
         $.ajax({
-            url: '/assignments?order=1',
+            url: '/assignments?order=1&q=' + searchTerm,
+            data: {},
+            method: 'get',
+            dataType: 'json',
+            success: function(data){
+                clearData();
+                processData(data);
+            },
+            complete: function(){
+                console.log('Search call complete');
+            }
+        });
+    });
+
+    $('.ascend').on('click', function(){
+        var searchTerm = $('#searchName').val();
+        $.ajax({
+            url: '/assignments?order=1&q=' + searchTerm,
             data:{},
             method: 'get',
             dataType: 'json',
@@ -40,8 +58,9 @@ $(document).ready(function(){
     });
 
     $('.descend').on('click', function(){
+        var searchTerm = $('#searchName').val();
         $.ajax({
-            url: '/assignments?order=-1',
+            url: '/assignments?order=-1&q=' + searchTerm,
             data:{},
             method: 'get',
             dataType: 'json',
